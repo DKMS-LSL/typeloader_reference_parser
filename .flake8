@@ -1,0 +1,34 @@
+[flake8]
+#S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+#ANN001 Missing type annotation for function argument
+#ANN201 Missing return type annotation for public function
+#D103 Missing docstring in public function
+#D403 First word of the first line should be properly capitalized
+
+#SIM103: Return the condition X directly
+#E402 module level import not at top of file
+
+max-line-length = 120
+ignore =
+mypy-init-return = True
+per-file-ignores =
+    tests/*: S101, ANN001, ANN201, D103, D403
+
+exclude =
+    .git
+    __pycache__
+    build
+    dist
+    .venv
+    .tox
+    .idea
+    .poetry
+    temp*.py
+    __init__.py
+
+# docstring should be in sphinx style (darglint)
+docstring_style=sphinx
+
+# One-line descriptions and descriptions without arguments/returns/yields/etc. sections will be allowed.
+# Anything more, and the docstring will be fully checked. (darglint)
+strictness=long

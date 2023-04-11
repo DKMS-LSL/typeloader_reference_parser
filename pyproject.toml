@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "typeloader_reference_parser"
+version = "0.1.0"
+description = "a set of Python scripts to parse and store reference data for TypeLoader"
+authors = ["Bianca Schöne <schoene@dkms-lab.de>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10.4"
+lslcommons-loggerutils = {git = "https://srvddgit01.labor.local/clarity/python-libraries/lslcommons/lslcommons-loggerutils.git", tag = "0.4.0"}
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.0.0"
+
+
+[tool.poetry.group.testing.dependencies]
+pytest = "^7.3.0"
+pytest-cov = "^4.0.0"
+pytest-mock = "^3.10.0"
+coverage = "^7.2.3"
+
+[tool.black]
+line-length = 100
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+atomic = true # Nur speichern, wenn kein Syntaxfehler
+line_length = 100 # Zeilenlänge begrenzen
+include_trailing_comma = true # Bei import Aufzählungen, die umgebrochen werden, wird ein Komma hinter das letzte Element gesetzt
+lines_between_types = 1 # Zeile zwischen verschiedenen Typen (Standard-Librarys, Third-Party, First-Party)
+multi_line_output = 3 # Wie umgebrochene imports formatiert werden sollen. Siehe https://timothycrosley.github.io/isort/docs/configuration/options/#multi-line-output
+use_parentheses = true # Klammern anstelle von \ bei Zeilenumbruch verwenden
+
+[build-system]
+requires = ["poetry>=1.3.2"]
+build-backend = "poetry.masonry.api"

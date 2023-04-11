@@ -1,0 +1,37 @@
+image: python:3.10
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  paths:
+    - "$PIP_CACHE_DIR"
+    - "$PRE_COMMIT_HOME"
+stages:
+  - lint
+  - tests
+before_script:
+  - pip install poetry==1.2.0
+  - poetry config experimental.system-git-client true
+  - poetry install
+
+run_linter:
+  stage: lint
+  script:
+    - poetry run pre-commit run --all-files
+  interruptible: true
+
+run_tests:
+  stage: tests
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  before_script:
+    - pip install poetry==1.2.0
+    - poetry config experimental.system-git-client true
+    - poetry install
+  script:
+    - poetry run pytest --cov $CI_PROJECT_NAME --junitxml=report_py.xml
+  interruptible: true
+  artifacts:
+    when: always
+    reports:
+      junit: report_py.xml

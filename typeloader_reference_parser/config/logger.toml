@@ -1,0 +1,35 @@
+[formatters]
+default_clarity = {format="%(asctime)s - %(name)s:%(levelname)s - %(filename)s:%(lineno)s:%(funcName)s - %(message)s"}
+short = {format='%(levelname).4s - [%(asctime)s] - %(message)s', datefmt='%Y-%m-%d %H:%M:%S'}
+default_bioinf = {format="%(levelname).4s - [%(asctime)s] - %(message)s \t\t\t\t\t- [%(name)s:%(filename)s:%(lineno)s:%(funcName)s]"}
+bioinf_parallel = {format="%(levelname).4s - [%(asctime)s] - %(process)d:%(thread)d - %(name)s:%(filename)s:%(lineno)s:%(funcName)s - %(message)s"}
+bioinf_parallel_elaborate = {format="%(levelname).4s - [%(asctime)s] - %(processName)s(%(process)s):%(threadName)s(%(thread)s) - %(name)s:%(filename)s:%(lineno)s:%(funcName)s - %(message)s"}
+
+[handlers.console]
+formatter = "short"
+class="logging.StreamHandler"
+level = "DEBUG"
+stream = "ext://sys.stderr"
+
+[handlers.file]
+formatter = "default_bioinf"
+class = "logging.FileHandler"
+level = "DEBUG"
+filename = "log/typeloader_reference_parser.log"
+mode = "w"
+
+[handlers.error_to_email]
+class = "lslcommons.loggerutils.handlers.SMTP"
+formatter = "default_bioinf"
+level = "ERROR"
+mailhost = ["vsrvexchange02.labor.local", "25"]
+fromaddr = "{script_name}@{node_name}"
+toaddrs = ["schoene@dkms-lab.de"]
+subject = "Error in {script_name}"
+
+[root]
+handlers = ["console", "file", "error_to_email"]
+level = "DEBUG"
+
+[other]
+create_log_dirs = true
