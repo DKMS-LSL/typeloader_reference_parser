@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "typeloader_reference_parser"
-version = "0.1.0"
+version = "1.0.0-RC1"
 description = "a set of Python scripts to parse and store reference data for TypeLoader"
 authors = ["Bianca Schöne <schoene@dkms-lab.de>"]
 readme = "README.md"
