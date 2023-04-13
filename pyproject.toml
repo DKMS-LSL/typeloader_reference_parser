@@ -7,7 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10.4"
-lslcommons-loggerutils = {git = "https://srvddgit01.labor.local/clarity/python-libraries/lslcommons/lslcommons-loggerutils.git", tag = "0.4.0"}
+requests = "^2.28.2"
+beautifulsoup4 = "^4.12.2"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.0.0"
